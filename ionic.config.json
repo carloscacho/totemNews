@@ -1,0 +1,7 @@
+{
+  "name": "totemNews",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
