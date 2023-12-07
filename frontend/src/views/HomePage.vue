@@ -15,7 +15,7 @@
 
       <div id="container">
         <strong>Testando App?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
       </div>
     </ion-content>
   </ion-page>
@@ -23,12 +23,40 @@
 
 <script setup lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import puppeteer from 'puppeteer';
+
+const getNewsPage = async () => {
+
+  // Launch the browser
+  const browser = await puppeteer.launch();
+
+  // Create a page
+  const page = await browser.newPage();
+
+  // Go to your site
+  await page.goto('http://www.ifms.edu.br/noticias/2023/ifms-firma-acordo-para-ter-emissora-de-radio-educativa');
+
+  // Query for an element handle.
+  const element = await page.waitForSelector('div > .documentFirstHeading');
+
+  console.log(element.value)
+  // Do something with element...
+  // await element.click(); // Just an example.
+
+  // // Dispose of handle
+  // await element.dispose();
+
+  // Close browser.
+  await browser.close();
+
+
+}
+
 </script>
 
 <style scoped>
 #container {
   text-align: center;
-  
   position: absolute;
   left: 0;
   right: 0;
@@ -44,9 +72,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue
 #container p {
   font-size: 16px;
   line-height: 22px;
-  
   color: #8c8c8c;
-  
   margin: 0;
 }
 
